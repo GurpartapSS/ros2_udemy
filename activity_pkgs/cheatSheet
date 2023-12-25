@@ -1,0 +1,16 @@
+Node:
+remap -
+ros2 run {pkg_name} {Node} --ros-args -r __node:={newName}
+
+Topic:
+remap -
+ros2 interface show {topic name}
+ros2 run {pkg_name} {Node} --ros-args -r {topicname}:={newName}
+
+services:
+ros2 service list
+ros2 service type {service name}
+ros2 interface show {service type}
+ros2 service call {service name} {service type} "{}"
+remap -
+ros2 run {pkg_name} {serviceNode} --ros-args -r {serviceName}:={newName}
