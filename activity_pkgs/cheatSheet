@@ -14,3 +14,6 @@ ros2 interface show {service type}
 ros2 service call {service name} {service type} "{}"
 remap -
 ros2 run {pkg_name} {serviceNode} --ros-args -r {serviceName}:={newName}
+
+msg:
+ros2 interface package {package_name} - to see all msg and services available
