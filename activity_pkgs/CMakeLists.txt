@@ -14,6 +14,7 @@ find_package(activity_pkgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SetLed.srv"
+  "msg/LedPanelStatus.msg"
 )
 
 add_executable(a2_numberPub src/a02_number_pub.cpp)
@@ -25,14 +26,18 @@ ament_target_dependencies(a2_numberCounter rclcpp example_interfaces)
 add_executable(a3_numberReset src/a03_numberCounterReset.cpp)
 ament_target_dependencies(a3_numberReset rclcpp example_interfaces)
 
-add_executable(a4_batteryStatePub src/a04_batteryState_pub.cpp)
-ament_target_dependencies(a4_batteryStatePub rclcpp activity_pkgs)
+add_executable(a4_batteryStateMonitor src/a04_batteryState_Monitor.cpp)
+ament_target_dependencies(a4_batteryStateMonitor rclcpp activity_pkgs)
+
+add_executable(a4_ledPanel src/a04_led_panel.cpp)
+ament_target_dependencies(a4_ledPanel rclcpp activity_pkgs)
 
 install(TARGETS
 a2_numberPub
 a2_numberCounter
 a3_numberReset
-a4_batteryStatePub
+a4_batteryStateMonitor
+a4_ledPanel
 DESTINATION lib/${PROJECT_NAME}
 )
 

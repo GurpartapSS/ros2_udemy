@@ -1,3 +1,4 @@
-int8 leds
+int8 led_number
+int8 state
 ---
 bool success
