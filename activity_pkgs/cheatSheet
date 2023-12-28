@@ -39,6 +39,22 @@ ros2 param list
 ros2 param get {node name} {param name} - gives current value of param
 ros2 run {pkg_name} {node_name} --ros-args -p {parameterName}:={param Value}
 
+launch file:
+py file - 
+start function has to be *generate_launch_description*
+add <exec_depend>{package_name} to pkg.xml to include the package that has target node or interfaces
+add following to the cmakelist to build launch file
+install(DIRECTORY 
+  launch
+  DESTINATION share/{PROJECT_NAME}
+)
+
+In Node, add package and executable names
+to rename a node. add name="{new_name}"
+to remap a topic add remapping = [(tuples of topic name and new name)]
+
+
+
 
 whats use of: 
 symlink install
