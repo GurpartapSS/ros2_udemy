@@ -15,6 +15,9 @@
   <member_of_group>rosidl_interface_packages</member_of_group>
   <!-- till here -->
 
+  <exec_depend>my_pkg_cpp</exec_depend>
+  <exec_depend>my_robot_interfaces</exec_depend>
+
   <depend>rclcpp</depend>
   <depend>example_interfaces</depend>
 

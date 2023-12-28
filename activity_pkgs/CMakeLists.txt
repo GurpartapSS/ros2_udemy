@@ -32,6 +32,8 @@ ament_target_dependencies(a4_batteryStateMonitor rclcpp activity_pkgs)
 add_executable(a4_ledPanel src/a04_led_panel.cpp)
 ament_target_dependencies(a4_ledPanel rclcpp activity_pkgs)
 
+
+
 install(TARGETS
 a2_numberPub
 a2_numberCounter
@@ -41,5 +43,9 @@ a4_ledPanel
 DESTINATION lib/${PROJECT_NAME}
 )
 
+install(DIRECTORY
+launch
+DESTINATION share/${PROJECT_NAME}
+)
 ament_export_dependencies(rosidl_default_runtime)
 ament_package()
