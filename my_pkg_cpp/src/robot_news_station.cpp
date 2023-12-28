@@ -4,8 +4,10 @@
 class RobotNewsStationNode : public rclcpp::Node
 {
 public:
-    RobotNewsStationNode() : Node("robot_news_station"), robot_name_("Maya")
+    RobotNewsStationNode() : Node("robot_news_station")
     {
+        this->declare_parameter("robot_name", "Maya");
+        robot_name_ = this->get_parameter("robot_name").as_string();
         publisher_ = this->create_publisher<example_interfaces::msg::String>("robot_news", 10); // 10 - Queue size
         timer_ = this->create_wall_timer(std::chrono::milliseconds(500),
                                          std::bind(&RobotNewsStationNode::publishNews, this));
