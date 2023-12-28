@@ -7,6 +7,21 @@ remap -
 ros2 interface show {topic name}
 ros2 run {pkg_name} {Node} --ros-args -r {topicname}:={newName}
 
+to build custom msg/service add following:
+
+pkg.xml
+<!-- adding to include custom service/message  -->
+<build_depend>rosidl_default_generators</build_depend>
+<exec_depend>rosidl_default_runtime</exec_depend>
+<member_of_group>rosidl_interface_packages</member_of_group>
+<!-- till here -->
+
+cmake
+find_package(activity_pkgs REQUIRED)
+rosidl_generate_interfaces({PROJECT_NAME} srv/serviceName)
+
+ament_export_dependencies(rosidl_default_runtime) - before ament_package()
+
 services:
 ros2 service list
 ros2 service type {service name}
@@ -17,3 +32,15 @@ ros2 run {pkg_name} {serviceNode} --ros-args -r {serviceName}:={newName}
 
 msg:
 ros2 interface package {package_name} - to see all msg and services available
+
+parameters:
+need to declare before using *declare_param({name})*- else won't show error when running the node but param wont appear in the list
+ros2 param list
+ros2 param get {node name} {param name} - gives current value of param
+ros2 run {pkg_name} {node_name} --ros-args -p {parameterName}:={param Value}
+
+
+whats use of: 
+symlink install
+sharedptr
+std::bind
