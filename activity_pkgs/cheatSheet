@@ -32,6 +32,7 @@ ros2 run {pkg_name} {serviceNode} --ros-args -r {serviceName}:={newName}
 
 msg:
 ros2 interface package {package_name} - to see all msg and services available
+you can create a custom msg type and then create another msg that has array for the new custom msg type
 
 parameters:
 need to declare before using *declare_param({name})*- else won't show error when running the node but param wont appear in the list
@@ -56,7 +57,7 @@ to remap a topic add remapping = [(tuples of topic name and new name)]
 
 
 
-whats use of: 
-symlink install
+whats the use of: 
+symlink install -- create a symbolic link so you dont have to build the package again
 sharedptr
 std::bind

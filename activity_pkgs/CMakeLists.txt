@@ -12,10 +12,14 @@ find_package(rclcpp REQUIRED)
 find_package(example_interfaces REQUIRED)
 find_package(activity_pkgs REQUIRED)
 find_package(turtlesim REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SetLed.srv"
+  "srv/CatchTurtle.srv"
   "msg/LedPanelStatus.msg"
+  "msg/Turtle.msg"
+  "msg/TurtleArray.msg"
 )
 
 add_executable(a2_numberPub src/a02_number_pub.cpp)
@@ -34,8 +38,10 @@ add_executable(a4_ledPanel src/a04_led_panel.cpp)
 ament_target_dependencies(a4_ledPanel rclcpp activity_pkgs)
 
 add_executable(project_spawnTurtle src/project_spawn_turtle.cpp)
-ament_target_dependencies(project_spawnTurtle rclcpp turtlesim)
+ament_target_dependencies(project_spawnTurtle rclcpp turtlesim activity_pkgs)
 
+add_executable(project_controlTurtle src/project_control_turtle.cpp)
+ament_target_dependencies(project_controlTurtle rclcpp turtlesim geometry_msgs activity_pkgs)
 
 
 install(TARGETS
@@ -45,6 +51,7 @@ a3_numberReset
 a4_batteryStateMonitor
 a4_ledPanel
 project_spawnTurtle
+project_controlTurtle
 DESTINATION lib/${PROJECT_NAME}
 )
 
