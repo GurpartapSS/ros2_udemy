@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<robot name ="my_robot">
+    <material name="green">
+        <color rgba="0 .5 0 1"/>
+    </material>
+    <material name="blue">
+        <color rgba="0 0 0.5 1"/>
+    </material>
+    <material name="grey">
+        <color rgba="0.1 0.1 0.1 1"/>
+    </material>
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.6 0.4 0.2"/>
+            </geometry>
+            <origin xyz="0 0 0.1" rpy="0 0 0" />
+            <material name="green"/>
+        </visual>
+    </link>
+
+    <link name="second_link">
+        <visual>
+            <geometry>
+                <cylinder radius="0.1" length="0.2"/>
+            </geometry>
+            <origin xyz="0 0 0.1" rpy="0 0 0"/>
+            <material name="blue"/>
+        </visual>
+    </link>
+
+    <joint name="base_second_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="second_link"/>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+    </joint>
+
+    <!-- <link name="third_link">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+            <origin xyz="0 0 0.05" rpy="0 0 0" />
+            <material name="test"/>
+        </visual>
+    </link>
+
+    <joint name="second_third_jt" type="revolute">
+        <parent link="second_link"/>
+        <child link="third_link"/>
+        <origin xyz="0 0 0.2" rpy="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit lower="-1.57" upper="1.57" effort="100" velocity="100"/>
+    </joint> -->
+
+    <link name="right_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.1" length="0.05"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="base_right_wheel_jt" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="-0.15 -0.225 0" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="left_wheel">
+        <visual>
+            <geometry>
+                <cylinder radius="0.1" length="0.05"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="-1.57 0 0"/>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="base_left_wheel_jt" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="-0.15 0.225 0" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="caster_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.05"/>
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <material name="grey"/>
+        </visual>
+    </link>
+
+    <joint name="base_caster_jt" type="fixed">
+        <parent link="base_link"/>
+        <child link="caster_wheel"/>
+        <origin xyz="0.2 0 -0.05" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_footprint">
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </link>
+    <joint name="base_baseFootprint_jt" type="fixed">
+        <parent link="base_link"/>
+        <child link="base_footprint"/>
+        <origin xyz="0 0 -0.1" rpy="0 0 0"/>
+    </joint>
+
+</robot>

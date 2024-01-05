@@ -1,0 +1,9 @@
+urdf:
+link defines an individual part with origin and visual
+joint conects two links:- 
+define type, name parent and child and origin
+
+ref link: https://wiki.ros.org/urdf/XML
+
+tf:
+ros2 run tf2_tools view_frames -o outputfilename
