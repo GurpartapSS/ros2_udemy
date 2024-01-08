@@ -7,3 +7,25 @@ ref link: https://wiki.ros.org/urdf/XML
 
 tf:
 ros2 run tf2_tools view_frames -o outputfilename
+
+xacro:
+sudo apt ros-humble-xacro
+rename urdf to .xacro
+add to robot name - <robot name ="my_robot" xmlns=:xacro="https://wiki.ros.org/xacro">
+create new variables: <xacro:property name="" value=""/>
+create new function <xacro:macro name="" params=""><links to be used ></xacro:macro>
+to use: <xacro:name param1="value" param2="value" />
+to include other xacro files:
+    create tag with no robot name
+    in the main file, use <xacro:include filename="filepath/name"/>
+
+mesh:
+to use mesh, create mesh folder
+add to cmake to install
+in visual: <mesh filename="package:filepath" scale="x y z"/>
+
+Gazebo:
+to add physics: gravity and inertia
+to URDF add inertia tag - 
+    https://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
+    https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors

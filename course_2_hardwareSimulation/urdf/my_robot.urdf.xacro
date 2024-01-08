@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot name ="my_robot" xmlns:xacro="https://wiki.ros.org/xacro">
+
+    <xacro:include filename="common_properties.xacro"/>
+    <!-- the included files can be used in the other include files as well -->
+    <xacro:include filename="mobile_base.xacro"/>
+
+</robot>
