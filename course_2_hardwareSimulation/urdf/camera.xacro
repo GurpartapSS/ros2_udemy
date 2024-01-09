@@ -15,11 +15,22 @@
     <xacro:inertia_box m="0.1" l="0.01" w="0.1" h="0.05" xyz="0 0 0" rpy="0 0 0" />
     </link>
 
+    <link name="camera_optical_link">
+    </link>
+
+    <joint name="camera_cv" type="fixed">
+        <parent link="camera_link"/>
+        <child link="camera_optical_link"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+    </joint>
+
     <joint name="base_camera_jt" type="fixed">
         <parent link="base_link" />
         <child link="camera_link" />
         <origin xyz="0.305 0 0.1" rpy="0 0 0" />
     </joint>
+
+
     <gazebo reference="camera_link">
         <material>Gazebo/Red</material>
         <sensor name="camera" type="camera">
@@ -27,7 +38,7 @@
             <visualize>true</visualize>
             <update_rate>10.0</update_rate>
             <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-                <frame_name>camera_link</frame_name>
+                <frame_name>camera_cv</frame_name>
             </plugin>
         </sensor>
 
