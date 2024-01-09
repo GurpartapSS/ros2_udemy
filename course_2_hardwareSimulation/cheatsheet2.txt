@@ -29,3 +29,8 @@ to add physics: gravity and inertia
 to URDF add inertia tag - 
     https://wiki.ros.org/urdf/Tutorials/Adding%20Physical%20and%20Collision%20Properties%20to%20a%20URDF%20Model
     https://en.wikipedia.org/wiki/List_of_moments_of_inertia#List_of_3D_inertia_tensors
+
+Plugins:
+https://classic.gazebosim.org/tutorials?tut=ros_gzplugins
+https://github.com/ros-simulation/gazebo_ros_pkgs/tree/ros2/gazebo_plugins/include/gazebo_plugins
+!!! copy template from the include files

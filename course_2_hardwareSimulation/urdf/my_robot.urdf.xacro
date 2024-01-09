@@ -4,5 +4,6 @@
     <xacro:include filename="common_properties.xacro"/>
     <!-- the included files can be used in the other include files as well -->
     <xacro:include filename="mobile_base.xacro"/>
+    <xacro:include filename="mobile_base_gazebo.xacro"/>
 
 </robot>

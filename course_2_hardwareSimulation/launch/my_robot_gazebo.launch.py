@@ -8,7 +8,7 @@ def generate_launch_description():
     ld = LaunchDescription()
     urdf_path = os.path.join(get_package_share_path('my_robot_description'),'urdf','my_robot.urdf.xacro')
     rviz_path = os.path.join(get_package_share_path('my_robot_description'),'rviz','my_robot.rviz')
-
+    world_path = os.path.join(get_package_share_path('my_robot_description'),'world','my_robot.world')
 
     robot_state_pub = Node(
         package="robot_state_publisher",
@@ -20,7 +20,8 @@ def generate_launch_description():
 
     launch_gazeo = actions.IncludeLaunchDescription(
         launch_description_sources.PythonLaunchDescriptionSource(
-            os.path.join('/opt/ros/humble/share/gazebo_ros/launch/', 'gazebo.launch.py')))
+            os.path.join('/opt/ros/humble/share/gazebo_ros/launch/', 'gazebo.launch.py')),
+            launch_arguments={'world': world_path}.items())
 
     spawmer_node = Node(
         package="gazebo_ros",
