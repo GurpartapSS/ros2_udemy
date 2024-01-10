@@ -10,6 +10,12 @@
     <material name="grey">
         <color rgba="0.1 0.1 0.1 1" />
     </material>
+    <material name="yellow">
+        <color rgba="0.5 0.5 0.0 1" />
+    </material>
+    <material name="orange">
+        <color rgba="0.7 0.4 0.0 1" />
+    </material>
 
     <xacro:macro name="inertia_box" params="l w h m xyz rpy">
         <inertail>
