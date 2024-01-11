@@ -3,8 +3,16 @@
 
     <xacro:include filename="common_properties.xacro"/>
     <!-- the included files can be used in the other include files as well -->
-    <xacro:include filename="mobile_base_2.xacro"/>
-    <xacro:include filename="camera.xacro"/>
+    <xacro:include filename="arm.xacro" />
+    <xacro:include filename="mobile_base.xacro"/>
+    <!-- <xacro:include filename="camera.xacro"/> -->
+    <xacro:include filename="arm_gazebo.xacro" />
     <xacro:include filename="mobile_base_gazebo.xacro"/>
+
+    <joint name="base_arm_jt" type="fixed">
+        <parent link="base_link" />
+        <child link="arm_base_link" />
+        <origin xyz="${base_length / 4} 0 ${base_height}" rpy="0 0 0" />
+    </joint>
 
 </robot>

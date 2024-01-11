@@ -20,11 +20,6 @@ def generate_launch_description():
             ]
     )
 
-    joint_states_node = Node(
-        package="joint_state_publisher_gui",
-        executable="joint_state_publisher_gui"
-    )
-
     rviz_node = Node(
         package="rviz2",
         executable="rviz2",
@@ -45,7 +40,6 @@ def generate_launch_description():
 
     ld.add_action(robot_publisher_node)
     ld.add_action(rviz_node)
-    ld.add_action(joint_states_node)
     ld.add_action(launch_gazeo)
     ld.add_action(spawmer_node)
     return ld

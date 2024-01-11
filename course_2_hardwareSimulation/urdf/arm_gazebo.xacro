@@ -8,9 +8,29 @@
     <gazebo reference="forearm_link">
         <material>Gazebo/Yellow</material>
     </gazebo>
-    
+
     <gazebo reference="hand_link">
         <material>Gazebo/Orange</material>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="joint_state_publisher_controller"
+            filename="libgazebo_ros_joint_state_publisher.so">
+            <update_rate>10</update_rate>
+
+            <joint_name>base_forearm_joint</joint_name>
+            <joint_name>forearm_hand_joint</joint_name>
+
+        </plugin>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="joint_pose_trajectory_controller"
+            filename="libgazebo_ros_joint_pose_trajectory.so">
+
+            <update_rate>2</update_rate>
+
+        </plugin>
     </gazebo>
 
 </robot>
