@@ -17,17 +17,17 @@
         <color rgba="0.7 0.4 0.0 1" />
     </material>
 
-    <xacro:macro name="inertia_box" params="l w h m xyz rpy">
-        <inertail>
+    <xacro:macro name="inertia_box" params="m l w h xyz rpy">
+        <inertial>
             <origin xyz="${xyz}" rpy="${rpy}" />
             <mass value="${m}" />
             <inertia ixx="${(m/12)*(h*h + l*l)}" ixy="0" ixz="0"
                 iyy="${(m/12)*(w*w + l*l)}" iyz="0"
                 izz="${(m/12)*(h*h + w*w)}" />
-        </inertail>
+        </inertial>
     </xacro:macro>
 
-    <xacro:macro name="inertia_cylinder" params="r h m xyz rpy">
+    <xacro:macro name="inertia_cylinder" params="m r h xyz rpy">
         <inertial>
             <origin xzy="${xyz}" rpy="${rpy}" />
             <mass value="${m}" />
@@ -46,4 +46,5 @@
                 izz="${(2/5)*(m * r * r)}" />
         </inertial>
     </xacro:macro>
+
 </robot>
