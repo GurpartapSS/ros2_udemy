@@ -19,9 +19,12 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 
 add_executable(activity1_action_server src/activity1_action_server.cpp)
 ament_target_dependencies(activity1_action_server rclcpp rclcpp_action activity_pkg)
+add_executable(activity1_action_client src/activity1_action_client.cpp)
+ament_target_dependencies(activity1_action_client rclcpp rclcpp_action activity_pkg)
 
 INSTALL(TARGETS
   activity1_action_server
+  activity1_action_client
   DESTINATION lib/${PROJECT_NAME}
 )
 
