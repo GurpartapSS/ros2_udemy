@@ -1,18 +1,22 @@
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_action/rclcpp_action.hpp"
 #include "activity_pkg/action/move_robo.hpp"
+#include "activity_pkg/msg/cancel_move.hpp"
 
 using MoveRobo = activity_pkg::action::MoveRobo;
 using GoalHandle = rclcpp_action::ClientGoalHandle<MoveRobo>;
 using namespace std::placeholders;
-class MoveROboClientNode : public rclcpp::Node
+class MoveRoboClientNode : public rclcpp::Node
 {
 public:
-    MoveROboClientNode() : Node("move_robo_client")
+    MoveRoboClientNode() : Node("move_robo_client")
     {
         move_robo_client_ = rclcpp_action::create_client<MoveRobo>(this,
         "move_robo");
+    cancel_subscriber_ = this->create_subscription<activity_pkg::msg::CancelMove>("cancel_move", 10,
+        std::bind(&MoveRoboClientNode::subCancelCallBack, this, _1));
     }
+
 
     void send_goal(int position, int velocity) {
         move_robo_client_->wait_for_action_server();
@@ -23,18 +27,30 @@ public:
 
 
         auto goal_options = rclcpp_action::Client<MoveRobo>::SendGoalOptions();
-        goal_options.result_callback = std::bind(&MoveROboClientNode::goalCallBack, this, _1);
-        goal_options.feedback_callback = std::bind(&MoveROboClientNode::feedbackCallBack, this, _1, _2);
-        goal_options.goal_response_callback = std::bind(&MoveROboClientNode::goalResponseCallBack, this, _1);
+        goal_options.result_callback = std::bind(&MoveRoboClientNode::goalCallBack, this, _1);
+        goal_options.feedback_callback = std::bind(&MoveRoboClientNode::feedbackCallBack, this, _1, _2);
+        goal_options.goal_response_callback = std::bind(&MoveRoboClientNode::goalResponseCallBack, this, _1);
         RCLCPP_INFO(this->get_logger(), "Sending goal!");
         move_robo_client_->async_send_goal(goal, goal_options);
-        timer_ = this->create_wall_timer(std::chrono::milliseconds(100),std::bind(&MoveROboClientNode::timerCallBack, this));
+        timer_ = this->create_wall_timer(std::chrono::milliseconds(100),std::bind(&MoveRoboClientNode::timerCallBack, this));
     }
 
 private:
     rclcpp_action::Client<MoveRobo>::SharedPtr move_robo_client_;
     GoalHandle::SharedPtr goal_;
     rclcpp::TimerBase::SharedPtr timer_;
+
+    // Subscriber for cancel cmd
+    rclcpp::Subscription<activity_pkg::msg::CancelMove>::SharedPtr cancel_subscriber_;
+
+    void subCancelCallBack(activity_pkg::msg::CancelMove::SharedPtr msg) {
+        (void)msg;
+        // if(msg->data == 1) {
+            if(goal_){
+                move_robo_client_->async_cancel_goal(goal_);
+            }
+        // }
+    }
 
     void goalResponseCallBack(std::shared_ptr<GoalHandle> goal_handle) {
         if(!goal_handle) {
@@ -70,8 +86,8 @@ private:
     }
 
     void timerCallBack() {
-        RCLCPP_INFO(this->get_logger(),"cancel goal");
-        move_robo_client_->async_cancel_goal(goal_);
+        // RCLCPP_INFO(this->get_logger(),"cancel goal");
+        // move_robo_client_->async_cancel_goal(goal_);
         timer_->cancel();
     }
 };
@@ -79,8 +95,8 @@ private:
 int main(int argc, char **argv)
 {
     rclcpp::init(argc, argv);
-    auto node = std::make_shared<MoveROboClientNode>();
-    node->send_goal(100,2);
+    auto node = std::make_shared<MoveRoboClientNode>();
+    node->send_goal(1000,2);
     rclcpp::spin(node);
     rclcpp::shutdown();
     return 0;
